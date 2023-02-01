@@ -9,6 +9,7 @@ import style from './styles/modules/app.module.scss';
 export const AppContext = React.createContext();
 
 let varStartTime;
+export const BASE_URL = 'http://localhost:8000';
 
 function App() {
   const [reminds, setReminds] = React.useState([]);
@@ -38,7 +39,7 @@ function App() {
 
   const deleteData = async (id) => {
     try {
-      await fetch(`http://localhost:8000/remind/${id}`, {
+      await fetch(`${BASE_URL}/remind/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-type': 'application/json',
@@ -109,17 +110,12 @@ function App() {
   React.useEffect(() => {
     updateStartRangeTime();
     const fetchingData = async () => {
-      const queryParams = {
-        limit: 5,
-        nextCursor: 0,
-      };
-
       const finishTimeRange = new Date().toISOString();
       try {
         const res = await fetch(
           filter === 'completed'
-            ? `http://localhost:8000/${listParam}?limit=${limit}&cursor=${cursor}&start=${varStartTime}&end=${finishTimeRange}`
-            : `http://localhost:8000/${listParam}?limit=${limit}&cursor=${cursor}`
+            ? `${BASE_URL}/${listParam}?limit=${limit}&cursor=${cursor}&start=${varStartTime}&end=${finishTimeRange}`
+            : `${BASE_URL}/${listParam}?limit=${limit}&cursor=${cursor}`
         );
         if (!res.ok) throw new Error('Something went wrong!');
         const data = await res.json();

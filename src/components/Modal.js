@@ -5,7 +5,7 @@ import { MdOutlineClose } from 'react-icons/md';
 import toast from 'react-hot-toast';
 import styles from '../styles/modules/modal.module.scss';
 import Button from './Button';
-import { AppContext } from '../App';
+import { AppContext, BASE_URL } from '../App';
 
 function Modal({ modalOpen, setModalOpen, type, remind }) {
   const setRequestData = React.useContext(AppContext);
@@ -26,7 +26,7 @@ function Modal({ modalOpen, setModalOpen, type, remind }) {
   }, [modalOpen, type, remind]);
 
   const remindPosting = async (discribeInput, deadlineInput) => {
-    await fetch('http://localhost:8000/remind', {
+    await fetch(`${BASE_URL}/remind`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -47,7 +47,7 @@ function Modal({ modalOpen, setModalOpen, type, remind }) {
     deadlineInput,
     statusInput
   ) => {
-    await fetch(`http://localhost:8000/remind/${id}`, {
+    await fetch(`${BASE_URL}/remind/${id}`, {
       method: 'PUT',
       headers: {
         'Content-type': 'application/json',

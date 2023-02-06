@@ -9,7 +9,7 @@ import style from './styles/modules/app.module.scss';
 export const AppContext = React.createContext();
 
 let varStartTime;
-export const BASE_URL = 'http://localhost:8000';
+export const BASE_URL = 'https://reminder-api-oz2kvyderq-uc.a.run.app';
 
 function App() {
   const [reminds, setReminds] = React.useState([]);

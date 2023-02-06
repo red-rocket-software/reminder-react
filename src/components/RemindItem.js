@@ -4,7 +4,7 @@
 import { format } from 'date-fns';
 import React from 'react';
 import { MdDelete, MdDone, MdEdit } from 'react-icons/md';
-import { AppContext } from '../App';
+import { AppContext, BASE_URL } from '../App';
 import styles from '../styles/modules/remindItem.module.scss';
 import { getClasses } from '../utils/getClasses';
 import Modal from './Modal';
@@ -19,7 +19,7 @@ function RemindItem({ remind, handleDelete }) {
     if (remind.completed === true) {
       return;
     }
-    await fetch(`http://localhost:8000/status/${id}`, {
+    await fetch(`${BASE_URL}/status/${id}`, {
       method: 'PUT',
       headers: {
         'Content-type': 'application/json',
